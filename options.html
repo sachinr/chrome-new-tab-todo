@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="options_page">
+  <head>
+    <title>Options</title>
+    <link href="options.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body class="options_page">
+    <div id="wrapper">
+      <div id="header"><h1>New Tab Todo List</h1></div>
+      <div id="options">
+        <fieldset>
+          <legend>Settings</legend>
+          <table id="shortcuts_table">
+            <tbody id="menu_shortcuts">
+            <tr>
+              <td><label for="visible">Dropbox App Token</label></td>
+              <td>
+                <input id="token" size="70">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </fieldset>
+
+        <div id="status">
+          <span></span>
+        </div>
+      </div>
+      <div id="action_panel">
+        <input type="button" id="save" value="Save" />
+      </div>
+    </div>
+  </body>
+  <script src="javascripts/options.js"></script>
+</html>

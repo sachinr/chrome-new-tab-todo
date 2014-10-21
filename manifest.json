@@ -1,0 +1,24 @@
+{
+  "name": "Blank new tab page",
+  "description": "Override the new tab page with a blank one",
+  "version": "0.2",
+  "incognito": "split",
+  "options_page": "options.html",
+  "content_scripts": [{
+    "all_frames": false,
+    "run_at":     "document_start",
+    "matches":    ["https://halp.githubapp.com/*"],
+    "js":         ["javascripts/jquery.js", "javascripts/app.js",
+    "javascripts/dropbox-datastores-1.2-latest.js"]
+  }],
+
+  "chrome_url_overrides": {
+    "newtab": "blank.html"
+  },
+
+  "permissions": [
+    "storage",
+    "bookmarks"
+  ],
+  "manifest_version": 2
+}

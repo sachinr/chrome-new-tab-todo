@@ -1,0 +1,74 @@
+body {
+  background-color: rgb(255, 255, 255);
+  color: rgb(61, 70, 77);
+  cursor: auto;
+  direction: ltr;
+  display: block;
+  font-family: 'Open Sans', 'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode', tahoma, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  height: 41px;
+  min-height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.header{
+  border-bottom: rgb(171, 213, 247) solid 1px;
+  height: 40px;
+  padding: 0;
+}
+
+.header .header-text{
+  color: rgb(102, 102, 102);
+  font-size: 18px;
+  font-weight: 600;
+  height: 24px;
+  left: 50px;
+  padding-top: 8px;
+  position: absolute;
+  right: 50px;
+  text-align: center;
+}
+
+.todo-container {
+  color: rgb(61, 70, 77);
+  width: 100%;
+}
+
+.todo-content {
+  bottom: 0px;
+  position: absolute;
+  top: 41px;
+  width: 100%;
+}
+
+.lists-container {
+  border-right-color: rgb(221, 221, 221);
+  border-right-style: solid;
+  border-right-width: 1px;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 28px;
+  overflow-y: auto;
+  vertical-align: top;
+  width: 239px;
+  height: 100%;
+}
+
+.list-container {
+  background-color: rgb(240, 250, 255);
+  bottom: 0px;
+  color: rgb(61, 70, 77);
+  left: 240px;
+  line-height: 28px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  padding: 10px;
+}
+
+.raw-list {
+  height: 150px;
+}
