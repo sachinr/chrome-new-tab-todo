@@ -30,33 +30,34 @@ app.init = function(){
     console.log('You need to set a Dropbox application token');
   }
 
-}
+},
 
 app.loadLists = function(){
-  if (app.lists.query().length == 0){
+  if (app.lists.query().length === 0){
     app.lists.insert({
       title: 'First list',
       created: new Date()
     });
-  };
+  }
 
   $.each(app.lists.query(), function(i, q) {
-    $('.lists-container').append(["<li>", q.get("title") ,"</li>"].join(' '))
+    $('.lists-container').append(["<li>", q.get("title") ,"</li>"].join(' '));
   });
 
   app.loadFirstList();
-}
+  app.loadBookmarks();
+},
 
 app.loadFirstList = function(){
   var firstList = app.lists.query()[0];
   app.currentList = firstList._rid;
   app.loadTasks();
-}
+},
 
 app.loadTasks = function(){
   $('.rendered-list').html('');
   var listTasks = app.tasks.query({listId: app.currentList});
-  if (listTasks.length == 0){
+  if (listTasks.length === 0){
     app.tasks.insert({
       listId: app.currentList,
       content: "first task",
@@ -64,23 +65,26 @@ app.loadTasks = function(){
       completed: false,
       created: new Date()
     });
-  };
+  }
 
   $.each(listTasks, function(i, q) {
     $('.rendered-list').append(["<li>", q.get("content") ,
       " [<a class='delete-task' href='#' data-task-id='", q._rid, "'>x</a>]",
-      " [<a class='edit-task' href='#' data-task-id='", q._rid, "'>e</a>] </li>"].join(''))
+      " [<a class='edit-task' href='#' data-task-id='", q._rid, "'>e</a>] </li>"].join(''));
   });
-}
+},
 
-app.getBookmarks = function(){
+app.loadBookmarks = function(){
   chrome.bookmarks.getSubTree("1", function(data){
-    var data = data[0].children;
-    $.each(data, function(i, b){
-      if(b.children == undefined){console.log(b.url)} ;
+    var children = data[0].children;
+    $.each(children, function(i, b){
+      if(b.children === undefined){
+        $('.lists-container').append(["<li><a href='", b.url ,"'>", b.title,"</a></li>"].join(''));
+        console.log(b);
+      }
     });
   });
-}
+},
 
 app.getMarkdown = function(raw, callback){
   $.ajax({
@@ -92,16 +96,16 @@ app.getMarkdown = function(raw, callback){
     }
   })
 
-}
+},
 
 $(function(){
   app.init();
 
-  $('.raw-list').width($('.list-container').width() - 20)
+  $('.raw-list').width($('.list-container').width() - 20);
 
   $(document).on('click', '.list-container .save-list', function(e) {
     e.preventDefault();
-    var taskId = $('.list-container .raw-list').data('edit-id')
+    var taskId = $('.list-container .raw-list').data('edit-id');
     var rawContent = $('.list-container .raw-list').val();
     app.getMarkdown(rawContent, function(renderedContent){
       if (taskId) {
@@ -137,5 +141,4 @@ $(function(){
     $('.list-container .raw-list').data('edit-id', task.getId());
   });
 
-  console.log(app.getBookmarks());
 });
