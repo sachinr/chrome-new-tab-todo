@@ -14,6 +14,10 @@ body {
   margin: 0;
 }
 
+h3 {
+ color: rgb(102, 102, 102);
+}
+
 .header{
   border-bottom: rgb(171, 213, 247) solid 1px;
   height: 40px;
@@ -44,7 +48,7 @@ body {
   width: 100%;
 }
 
-.lists-container {
+.sidebar {
   border-right-color: rgb(221, 221, 221);
   border-right-style: solid;
   border-right-width: 1px;
@@ -53,8 +57,13 @@ body {
   line-height: 28px;
   overflow-y: auto;
   vertical-align: top;
-  width: 239px;
+  width: 199px;
   height: 100%;
+  padding: 10px 20px;
+}
+
+.lists-container, .bookmarks-container {
+  list-style: none;
 }
 
 .list-container {
@@ -69,6 +78,68 @@ body {
   padding: 10px;
 }
 
+.raw-list-container {
+  box-sizing: border-box;
+  border: rgb(171, 213, 247) solid 1px;
+  display: block;
+  margin-bottom: 20px;
+}
+
 .raw-list {
   height: 150px;
+  width: 100%;
+  border: 0px;
+  resize: none;
+  outline: none;
+  font-family: 'Open Sans', 'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode', tahoma, sans-serif;
+  font-size: 13px;
+  padding: 5px;
+}
+
+.rendered-list {
+  margin-top: 20px;
+}
+
+.task-container {
+  background-color: rgb(255, 255, 255);
+  border: rgb(221, 221, 221) 1px solid;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 1px 0px;
+  box-sizing: border-box;
+  color: rgb(51, 51, 51);
+  display: block;
+  min-height: 52px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+
+.task-content {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.task-actions {
+  float: right;
+  margin: 10px;
+}
+
+.btn {
+  background-color: rgb(66, 133, 244);
+  border-color: rgba(255, 255, 255, 0.843137);
+  border-left-radius: 2px;
+  border-right-radius: 2px;
+  border-style: none;
+  border-width: 0px;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.843137);
+  display: inline-block;
+  font-size: 12px;
+  height: 34px;
+  line-height: 18px;
+  outline-width: 0px;
+  padding: 8px 30px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 137.125px;
 }

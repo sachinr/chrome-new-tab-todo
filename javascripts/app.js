@@ -68,9 +68,11 @@ app.loadTasks = function(){
   }
 
   $.each(listTasks, function(i, q) {
-    $('.rendered-list').append(["<li>", q.get("content") ,
-      " [<a class='delete-task' href='#' data-task-id='", q._rid, "'>x</a>]",
-      " [<a class='edit-task' href='#' data-task-id='", q._rid, "'>e</a>] </li>"].join(''));
+    taskTemplate = $('script[type="template/task"]').attr('template');
+    taskTemplate = taskTemplate.replace('{{content}}', q.get("content"));
+    taskTemplate = taskTemplate.replace(/\{\{\s?q\._rid\s?\}\}/g, q._rid);
+
+    $('.rendered-list').append(taskTemplate);
   });
 },
 
@@ -79,7 +81,7 @@ app.loadBookmarks = function(){
     var children = data[0].children;
     $.each(children, function(i, b){
       if(b.children === undefined){
-        $('.lists-container').append(["<li><a href='", b.url ,"'>", b.title,"</a></li>"].join(''));
+        $('.bookmarks-container').append(["<li><a href='", b.url ,"'>", b.title,"</a></li>"].join(''));
         console.log(b);
       }
     });
@@ -100,8 +102,6 @@ app.getMarkdown = function(raw, callback){
 
 $(function(){
   app.init();
-
-  $('.raw-list').width($('.list-container').width() - 20);
 
   $(document).on('click', '.list-container .save-list', function(e) {
     e.preventDefault();

@@ -5,6 +5,14 @@
   <script src="javascripts/jquery.js" type="text/javascript"></script>
   <script src="javascripts/dropbox-datastores-1.2-latest.js" type="text/javascript"></script>
   <script src="javascripts/app.js" type="text/javascript"></script>
+  <script template=
+    " <div class='task-container'>
+      <span class='task-content'>{{content}}</span>
+      <span class='task-actions'>
+        [<a class='delete-task' href='#' data-task-id='{{ q._rid }}'>x</a>]
+        [<a class='edit-task' href='#' data-task-id='{{ q._rid }}'>e</a>]
+      </span>
+      </div>" type="template/task"></script>
  </head>
  <body>
    <div class="header">
@@ -12,11 +20,21 @@
    </div>
    <div class="todo-container">
      <div class="todo-content">
-       <div class="lists-container"></div>
+       <div class="sidebar">
+         <h3>Lists</h3>
+         <div class="lists-container">
+         </div>
+
+         <h3>Bookmarks</h3>
+         <div class="bookmarks-container">
+         </div>
+       </div>
 
        <div class="list-container">
-         <textarea class="raw-list"></textarea>
-         <button class="save-list">Save</button>
+         <div class="raw-list-container">
+           <textarea class="raw-list"></textarea>
+         </div>
+         <button class="btn save-list">Save</button>
          <div class="rendered-list"></div>
        </div>
      </div>
