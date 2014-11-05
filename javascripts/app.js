@@ -92,7 +92,7 @@ app.getMarkdown = function(raw, callback){
   $.ajax({
     url: "https://api.github.com/markdown",
     method: "POST",
-    data: JSON.stringify({text: raw}),
+    data: JSON.stringify({text: raw, mode:"gfm"}),
     success: function(data) {
       callback(data);
     }

@@ -2,6 +2,8 @@
  <head>
   <title>Blank New Tab</title>
   <link href="stylesheets/app.css" type="text/css" rel="stylesheet">
+  <link href="stylesheets/octicons.css" type="text/css" rel="stylesheet">
+  <link href="stylesheets/linguist.css" type="text/css" rel="stylesheet">
   <script src="javascripts/jquery.js" type="text/javascript"></script>
   <script src="javascripts/dropbox-datastores-1.2-latest.js" type="text/javascript"></script>
   <script src="javascripts/app.js" type="text/javascript"></script>
@@ -9,8 +11,8 @@
     " <div class='task-container'>
       <span class='task-content'>{{content}}</span>
       <span class='task-actions'>
-        [<a class='delete-task' href='#' data-task-id='{{ q._rid }}'>x</a>]
-        [<a class='edit-task' href='#' data-task-id='{{ q._rid }}'>e</a>]
+        <a class='octicon octicon-pencil edit-task' href='#' data-task-id='{{ q._rid }}'></a>
+        <a class='octicon octicon-trashcan delete-task' href='#' data-task-id='{{ q._rid }}'></a>
       </span>
       </div>" type="template/task"></script>
  </head>

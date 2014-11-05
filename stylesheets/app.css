@@ -120,7 +120,7 @@ h3 {
 
 .task-actions {
   float: right;
-  margin: 10px;
+  margin: 15px;
 }
 
 .btn {
@@ -142,4 +142,5 @@ h3 {
   text-decoration: none;
   text-transform: uppercase;
   width: 137.125px;
+  cursor: pointer;
 }
