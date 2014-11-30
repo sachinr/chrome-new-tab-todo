@@ -3,6 +3,7 @@ app = {};
 app.init = function(){
 
   var token = localStorage.token;
+  $('.raw-list').val(localStorage.wipTask);
   if (token) {
     var client = new Dropbox.Client({key: '9i6d95bexmx3log', token: token});
 
@@ -105,6 +106,7 @@ $(function(){
 
   $(document).on('click', '.list-container .save-list', function(e) {
     e.preventDefault();
+    localStorage.wipTask = ""
     var taskId = $('.list-container .raw-list').data('edit-id');
     var rawContent = $('.list-container .raw-list').val();
     app.getMarkdown(rawContent, function(renderedContent){
@@ -139,6 +141,10 @@ $(function(){
     task = app.tasks.get($(e.target).data('task-id'));
     $('.list-container .raw-list').val(task.get('rawContent'));
     $('.list-container .raw-list').data('edit-id', task.getId());
+  });
+
+  $(document).on('keyup', '.raw-list', function(e){
+    localStorage["wipTask"] = $(this).val();
   });
 
 });
