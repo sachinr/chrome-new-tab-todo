@@ -58,15 +58,6 @@ app.loadFirstList = function(){
 app.loadTasks = function(){
   $('.rendered-list').html('');
   var listTasks = app.tasks.query({listId: app.currentList});
-  if (listTasks.length === 0){
-    app.tasks.insert({
-      listId: app.currentList,
-      content: "first task",
-      rawContent: "first task",
-      completed: false,
-      created: new Date()
-    });
-  }
 
   $.each(listTasks, function(i, q) {
     taskTemplate = $('script[type="template/task"]').attr('template');
@@ -83,7 +74,6 @@ app.loadBookmarks = function(){
     $.each(children, function(i, b){
       if(b.children === undefined){
         $('.bookmarks-container').append(["<li><a href='", b.url ,"'>", b.title,"</a></li>"].join(''));
-        console.log(b);
       }
     });
   });
@@ -126,7 +116,7 @@ $(function(){
       }
 
       app.loadTasks();
-
+      $('.raw-list').val('');
     });
   });
 
