@@ -55,7 +55,8 @@ app.loadLists = function(){
 },
 
 app.loadTasks = function(){
-  app.currentList = app.currentList || app.lists.query()[0]._rid;
+  app.currentList = app.currentList || localStorage["currentList"] || app.lists.query()[0]._rid;
+  localStorage["currentList"] = app.currentList;
   $(".list-title .active").removeClass('active');
   $(".list-title [data-list-id='" + app.currentList + "']").addClass('active')
 
@@ -105,10 +106,12 @@ $(function(){
 
   $(document).on('click', '.create-list', function(e) {
     e.preventDefault();
-    app.lists.insert({
+    record = app.lists.insert({
       title: $('.new-list-title').val(),
       created: new Date()
     });
+
+    app.currentList = record._rid;
 
     $('.new-list-title').val('');
     app.loadLists();
