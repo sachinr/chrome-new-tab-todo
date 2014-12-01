@@ -15,6 +15,14 @@
         <a class='octicon octicon-trashcan delete-task' href='#' data-task-id='{{ q._rid }}'></a>
       </span>
       </div>" type="template/task"></script>
+
+  <script template=
+    " <div>
+      <span class='list-title'><a class='list-title load-list' href='#' data-list-id='{{ q._rid }}'>{{title}}</a></span>
+        <span class='list-actions'>
+          <a class='octicon octicon-trashcan right delete-list' href='#' data-list-id='{{ q._rid }}'></a>
+        </span>
+      </div>" type="template/list"></script>
  </head>
  <body>
    <div class="header">
@@ -23,8 +31,15 @@
    <div class="todo-container">
      <div class="todo-content">
        <div class="sidebar">
-         <h3>Lists</h3>
+         <h3>
+           Lists
+           <a href="#" class="octicon octicon-plus right new-list"></a>
+         </h3>
          <div class="lists-container">
+         </div>
+         <div class="lists-actions hidden">
+             <input class="new-list-title">
+             <button class="small-btn create-list">Create</button>
          </div>
 
          <h3>Bookmarks</h3>
@@ -33,10 +48,10 @@
        </div>
 
        <div class="list-container">
-         <div class="raw-list-container">
-           <textarea class="raw-list"></textarea>
+         <div class="raw-task-container">
+           <textarea class="raw-task" tabindex="1"></textarea>
          </div>
-         <button class="btn save-list">Save</button>
+         <button class="btn save-task">Save</button>
          <div class="rendered-list"></div>
        </div>
      </div>

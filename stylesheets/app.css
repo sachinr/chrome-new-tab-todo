@@ -14,9 +14,12 @@ body {
   margin: 0;
 }
 
-h3 {
+h3, a {
  color: rgb(102, 102, 102);
 }
+
+.hidden { display:none; }
+.right { float:right; }
 
 .header{
   border-bottom: rgb(171, 213, 247) solid 1px;
@@ -78,14 +81,14 @@ h3 {
   padding: 10px;
 }
 
-.raw-list-container {
+.raw-task-container {
   box-sizing: border-box;
   border: rgb(171, 213, 247) solid 1px;
   display: block;
   margin-bottom: 20px;
 }
 
-.raw-list {
+.raw-task {
   height: 150px;
   width: 100%;
   border: 0px;
@@ -123,6 +126,24 @@ h3 {
   margin: 15px;
 }
 
+.small-btn {
+  background-color: rgb(102, 102, 102);
+  border-color: rgba(255, 255, 255, 0.843137);
+  border-left-radius: 2px;
+  border-right-radius: 2px;
+  border-style: none;
+  border-width: 0px;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.843137);
+  outline-width: 0px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 3px 5px;
+  margin-left: -5px;
+}
+
 .btn {
   background-color: rgb(66, 133, 244);
   border-color: rgba(255, 255, 255, 0.843137);
@@ -143,4 +164,15 @@ h3 {
   text-transform: uppercase;
   width: 137.125px;
   cursor: pointer;
+}
+
+.list-title .active {
+  text-decoration: none;
+  cursor: default;
+  color: rgb(102, 102, 102);
+}
+
+.new-list-title {
+  outline: none;
+  width: 148px;
 }

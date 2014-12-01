@@ -3,7 +3,7 @@ app = {};
 app.init = function(){
 
   var token = localStorage.token;
-  $('.raw-list').val(localStorage.wipTask);
+  $('.raw-task').val(localStorage.wipTask);
   if (token) {
     var client = new Dropbox.Client({key: '9i6d95bexmx3log', token: token});
 
@@ -20,10 +20,10 @@ app.init = function(){
         }
 
         app.datastore = datastore;
-        app.tasks     = app.datastore.getTable('tasks');
-        app.lists     = app.datastore.getTable('lists');
+        app.tasks       = app.datastore.getTable('tasks');
 
         app.loadLists();
+        app.loadBookmarks();
       });
     });
 
@@ -34,6 +34,9 @@ app.init = function(){
 },
 
 app.loadLists = function(){
+  $('.lists-container').html('');
+
+  app.lists = app.datastore.getTable('lists');
   if (app.lists.query().length === 0){
     app.lists.insert({
       title: 'First list',
@@ -42,20 +45,20 @@ app.loadLists = function(){
   }
 
   $.each(app.lists.query(), function(i, q) {
-    $('.lists-container').append(["<li>", q.get("title") ,"</li>"].join(' '));
+    listTemplate = $('script[type="template/list"]').attr('template');
+    listTemplate = listTemplate.replace('{{title}}', q.get("title"));
+    listTemplate = listTemplate.replace(/\{\{\s?q\._rid\s?\}\}/g, q._rid);
+    $('.lists-container').append(listTemplate);
   });
 
-  app.loadFirstList();
-  app.loadBookmarks();
-},
-
-app.loadFirstList = function(){
-  var firstList = app.lists.query()[0];
-  app.currentList = firstList._rid;
   app.loadTasks();
 },
 
 app.loadTasks = function(){
+  app.currentList = app.currentList || app.lists.query()[0]._rid;
+  $(".list-title .active").removeClass('active');
+  $(".list-title [data-list-id='" + app.currentList + "']").addClass('active')
+
   $('.rendered-list').html('');
   var listTasks = app.tasks.query({listId: app.currentList});
 
@@ -94,17 +97,50 @@ app.getMarkdown = function(raw, callback){
 $(function(){
   app.init();
 
-  $(document).on('click', '.list-container .save-list', function(e) {
+  $(document).on('click', '.new-list', function(e) {
+    $(this).hide();
+    $('.lists-actions').show();
+    $('.new-list-title').focus();
+  });
+
+  $(document).on('click', '.create-list', function(e) {
+    e.preventDefault();
+    app.lists.insert({
+      title: $('.new-list-title').val(),
+      created: new Date()
+    });
+
+    $('.new-list-title').val('');
+    app.loadLists();
+
+    $('.new-list').show();
+    $('.lists-actions').hide();
+  });
+
+  $(document).on('click', '.delete-list', function(e) {
+    e.preventDefault();
+    app.lists.get($(e.target).data('list-id')).deleteRecord();
+    app.currentList = null;
+    app.loadLists();
+  });
+
+  $(document).on('click', '.load-list', function(e) {
+    e.preventDefault();
+    app.currentList = $(e.target).data('list-id')
+    app.loadTasks();
+  });
+
+  $(document).on('click', '.list-container .save-task', function(e) {
     e.preventDefault();
     localStorage.wipTask = ""
-    var taskId = $('.list-container .raw-list').data('edit-id');
-    var rawContent = $('.list-container .raw-list').val();
+    var taskId = $('.list-container .raw-task').data('edit-id');
+    var rawContent = $('.list-container .raw-task').val();
     app.getMarkdown(rawContent, function(renderedContent){
       if (taskId) {
         app.tasks.get(taskId).set("content", renderedContent);
         app.tasks.get(taskId).set("rawContent", rawContent);
-        $('.list-container .raw-list').data('edit-id', null);
-        $('.list-container .raw-list').val('');
+        $('.list-container .raw-task').data('edit-id', null);
+        $('.list-container .raw-task').val('');
       } else {
         app.tasks.insert({
           listId: app.currentList,
@@ -116,7 +152,7 @@ $(function(){
       }
 
       app.loadTasks();
-      $('.raw-list').val('');
+      $('.raw-task').val('');
     });
   });
 
@@ -129,11 +165,11 @@ $(function(){
   $(document).on('click', '.edit-task', function(e) {
     e.preventDefault();
     task = app.tasks.get($(e.target).data('task-id'));
-    $('.list-container .raw-list').val(task.get('rawContent'));
-    $('.list-container .raw-list').data('edit-id', task.getId());
+    $('.list-container .raw-task').val(task.get('rawContent'));
+    $('.list-container .raw-task').data('edit-id', task.getId());
   });
 
-  $(document).on('keyup', '.raw-list', function(e){
+  $(document).on('keyup', '.raw-task', function(e){
     localStorage["wipTask"] = $(this).val();
   });
 
