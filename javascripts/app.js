@@ -28,7 +28,7 @@ app.init = function(){
     });
 
   } else {
-    alert('You need to set a Dropbox application token');
+    console.log('You need to set a Dropbox application token');
   }
 
 },
