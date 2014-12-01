@@ -28,7 +28,7 @@ app.init = function(){
     });
 
   } else {
-    console.log('You need to set a Dropbox application token');
+    alert('You need to set a Dropbox application token');
   }
 
 },
@@ -122,9 +122,11 @@ $(function(){
 
   $(document).on('click', '.delete-list', function(e) {
     e.preventDefault();
-    app.lists.get($(e.target).data('list-id')).deleteRecord();
-    app.currentList = null;
-    app.loadLists();
+    if(confirm("Are you sure?")){
+      app.lists.get($(e.target).data('list-id')).deleteRecord();
+      app.currentList = null;
+      app.loadLists();
+    }
   });
 
   $(document).on('click', '.load-list', function(e) {
