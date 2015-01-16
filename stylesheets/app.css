@@ -7,7 +7,6 @@ body {
   font-family: 'Open Sans', 'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode', tahoma, sans-serif;
   font-size: 13px;
   font-weight: normal;
-  height: 41px;
   min-height: 100%;
   width: 100%;
   padding: 0;
@@ -52,9 +51,6 @@ h3, a {
 }
 
 .sidebar {
-  border-right-color: rgb(221, 221, 221);
-  border-right-style: solid;
-  border-right-width: 1px;
   display: inline-block;
   font-size: 13px;
   line-height: 28px;
@@ -70,8 +66,10 @@ h3, a {
 }
 
 .list-container {
+  border-left-color: rgb(221, 221, 221);
+  border-left-style: solid;
+  border-left-width: 1px;
   background-color: rgb(240, 250, 255);
-  bottom: 0px;
   color: rgb(61, 70, 77);
   left: 240px;
   line-height: 28px;
@@ -79,6 +77,8 @@ h3, a {
   right: 0px;
   top: 0px;
   padding: 10px;
+  max-height: 30000px;
+  min-height: 100%;
 }
 
 .raw-task-container {
